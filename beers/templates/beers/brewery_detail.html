@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Brewery | {{ brewery.name }}</title>
+  </head>
+  <body>
+    <div>
+        Name: {{ brewery.name }}<br>
+        id: {{ brewery.id }}
+    </div>
+
+    <div>
+      Beers:
+      <ul>
+          {% for beer in brewery.beers.all %}<li><a href="{% url 'beer_detail' beer.id %}">{{ beer.name }}</a></li>{% endfor %}
+      </ul>
+    </div>
+
+  </body>
+</html>

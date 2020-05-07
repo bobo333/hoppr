@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Beers</title>
+    <title>Beer | {{ beer.name }}</title>
   </head>
   <body>
     <div>
@@ -10,14 +10,20 @@
         id: {{ beer.id }}
     </div>
 
-    {% for h in beer.hops.all %}
-      <div>
-        Hops:<br>
-        <ul>
-            <li>{{ h.name }}</li>
-        </ul>
-      </div>
-    {% endfor %}
+    <div>
+      Brewed by:
+      <ul>
+          {% for br in beer.breweries.all %}<li><a href="{% url 'brewery_detail' br.id %}">{{ br.name }}</a></li>{% endfor %}
+      </ul>
+    </div>
+
+
+    <div>
+      Hops:
+      <ul>
+          {% for h in beer.hops.all %}<li><a href="{% url 'hops_detail' h.id %}">{{ h.name }}</a></li>{% endfor %}
+      </ul>
+    </div>
 
   </body>
 </html>
