@@ -1,14 +1,15 @@
-from statistics import mean
+from statistics import mean, stdev
+
 
 def calculate_rating_data(reviews):
     if reviews:
         avg = mean(r.rating for r in reviews)
-        stddev = 5
+        sd = stdev(r.rating for r in reviews)
     else:
         avg = None
-        stddev = None
+        sd = None
 
     return {
         'avg': avg,
-        'stddev': stddev
+        'stdev': sd
     }

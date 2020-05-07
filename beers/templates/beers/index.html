@@ -2,17 +2,47 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Beers</title>
+    <title>Hoppr</title>
   </head>
   <body>
-    {% if beer_list %}
-        <ul>
-        {% for beer in beer_list %}
-            <li><a href="{% url 'beer_detail' beer.id %}">{{ beer.name }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No beers are available.</p>
-    {% endif %}
+    <div>
+      Beers:
+      {% if beer_list %}
+          <ul>
+          {% for beer in beer_list %}
+              <li><a href="{% url 'beer_detail' beer.id %}">{{ beer.name }}</a></li>
+          {% endfor %}
+          </ul>
+      {% else %}
+          <p>No beers available.</p>
+      {% endif %}
+    </div>
+
+    <div>
+      Breweries:
+      {% if brewery_list %}
+          <ul>
+          {% for brewery in brewery_list %}
+              <li><a href="{% url 'brewery_detail' brewery.id %}">{{ brewery.name }}</a></li>
+          {% endfor %}
+          </ul>
+      {% else %}
+          <p>No breweries available.</p>
+      {% endif %}
+    </div>
+
+    <div>
+      Hops:
+      {% if hops_list %}
+          <ul>
+          {% for hops in hops_list %}
+              <li><a href="{% url 'hops_detail' hops.id %}">{{ hops.name }}</a></li>
+          {% endfor %}
+          </ul>
+      {% else %}
+          <p>No hops available.</p>
+      {% endif %}
+    </div>
+
   </body>
 </html>
