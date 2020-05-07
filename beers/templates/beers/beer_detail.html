@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Beers</title>
+  </head>
+  <body>
+    <div>
+        Name: {{ beer.name }}<br>
+        id: {{ beer.id }}
+    </div>
+
+    {% for h in beer.hops.all %}
+      <div>
+        Hops:<br>
+        <ul>
+            <li>{{ h.name }}</li>
+        </ul>
+      </div>
+    {% endfor %}
+
+  </body>
+</html>

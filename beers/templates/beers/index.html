@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Beers</title>
+  </head>
+  <body>
+    {% if beer_list %}
+        <ul>
+        {% for beer in beer_list %}
+            <li><a href="{% url 'beer:beer_detail' beer.id %}">{{ beer.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No beers are available.</p>
+    {% endif %}
+  </body>
+</html>
