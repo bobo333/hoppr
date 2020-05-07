@@ -11,12 +11,12 @@ def index(request):
 
 def beer_detail(request, beer_id):
     beer = get_object_or_404(Beer, pk=beer_id)
-    return render(request, 'beers/beer_detail.html', {'beer': beer})
+    return render(request, 'beers/beer_detail.html', {'beer': beer, 'ratings': beer.rating_data()})
 
 def hops_detail(request, hops_id):
     hops = get_object_or_404(Hops, pk=hops_id)
-    return render(request, 'beers/hops_detail.html', {'hops': hops})
+    return render(request, 'beers/hops_detail.html', {'hops': hops, 'ratings': hops.rating_data()})
 
 def brewery_detail(request, brewery_id):
     brewery = get_object_or_404(Brewery, pk=brewery_id)
-    return render(request, 'beers/brewery_detail.html', {'brewery': brewery})
+    return render(request, 'beers/brewery_detail.html', {'brewery': brewery, 'ratings': brewery.rating_data()})

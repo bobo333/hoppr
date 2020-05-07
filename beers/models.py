@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from .utils import calculate_rating_data
+
 # Create your models here.
 
 class Hops(models.Model):
@@ -14,6 +16,10 @@ class Hops(models.Model):
     def __str__(self):
         return self.name
 
+    def rating_data(self):
+        reviews = Review.objects.filter(beer__hops__id=self.id)
+        return calculate_rating_data(reviews)
+
 class Beer(models.Model):
     name = models.TextField('name', null=False, blank=False)
     abv = models.IntegerField('abv', null=True, blank=True)
@@ -24,6 +30,10 @@ class Beer(models.Model):
 
     def __str__(self):
         return self.name
+
+    def rating_data(self):
+        reviews = self.reviews.all()
+        return calculate_rating_data(reviews)
 
 class Brewery(models.Model):
     name = models.TextField('name', null=False, blank=False)
@@ -37,8 +47,12 @@ class Brewery(models.Model):
     def __str__(self):
         return self.name
 
+    def rating_data(self):
+        reviews = Review.objects.filter(beer__breweries__id=self.id)
+        return calculate_rating_data(reviews)
+
 class Review(models.Model):
-    beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
+    beer = models.ForeignKey(Beer, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField('rating', null=False, blank=False)
     body = models.TextField('body', null=True, blank=True)

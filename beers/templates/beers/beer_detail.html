@@ -17,12 +17,21 @@
       </ul>
     </div>
 
-
     <div>
       Hops:
       <ul>
           {% for h in beer.hops.all %}<li><a href="{% url 'hops_detail' h.id %}">{{ h.name }}</a></li>{% endfor %}
       </ul>
+    </div>
+
+    <div>
+      Ratings
+      <div>
+        Your rating:
+      </div>
+      <div>
+        Avg rating: {{ ratings.avg }}
+      </div>
     </div>
 
   </body>
