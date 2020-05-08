@@ -2,12 +2,14 @@ from statistics import mean, stdev
 
 
 def calculate_rating_data(reviews):
+    avg = None
+    sd = None
+
     if reviews:
         avg = mean(r.rating for r in reviews)
-        sd = stdev(r.rating for r in reviews)
-    else:
-        avg = None
-        sd = None
+
+        if len(reviews) > 1:
+            sd = stdev(r.rating for r in reviews)
 
     return {
         'avg': avg,
