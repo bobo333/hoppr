@@ -29,7 +29,7 @@ class Hops(models.Model):
 
 class Beer(models.Model):
     name = models.TextField('name', null=False, blank=False)
-    abv = models.IntegerField('abv', null=True, blank=True)
+    abv = models.DecimalField('abv', decimal_places=2, max_digits=4, null=True, blank=True)
     ibu = models.IntegerField('ibu', null=True, blank=True)
     hops = models.ManyToManyField(Hops, related_name='beers', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
