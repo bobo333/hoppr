@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hoppr</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'beers/style.css' %}">
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block content %}
     {% if user.is_authenticated %}
     <p>Welcome, {{ user.username }} <a href="{% url 'logout' %}">logout</a></p>
     {% else %}
@@ -50,6 +43,4 @@
           <p>No hops available.</p>
       {% endif %}
     </div>
-
-  </body>
-</html>
+{% endblock content %}

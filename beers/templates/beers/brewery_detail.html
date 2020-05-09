@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Brewery | {{ brewery.name }}</title>
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block content %}
     <div>
         Name: {{ brewery.name }}<br>
         id: {{ brewery.id }}
@@ -21,6 +16,4 @@
       Avg Beer Rating: {{ ratings.avg }}<br>
       Std Dev: {{ ratings.stdev }}
     </div>
-
-  </body>
-</html>
+{% endblock content %}
