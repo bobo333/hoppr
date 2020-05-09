@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'beers/style.css' %}">
   </head>
   <body>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }} <a href="{% url 'logout' %}">logout</a></p>
+    {% else %}
+    <p><a href="{% url 'login' %}?next=/">Login</a></p>
+    {% endif %}
     <div>
       Beers:
       {% if beer_list %}
