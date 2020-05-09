@@ -1,0 +1,18 @@
+{% block content %}
+    {% if user_rating.avg %}
+        <div>
+            Your Rating
+            <div>
+            Avg Score: {{ user_rating.avg }}
+            </div>
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 20px;">
+        All Ratings
+        <div>
+            Avg Score: {{ ratings.avg }}<br>
+            Std Dev: {{ ratings.stdev }}
+        </div>
+    </div>
+{% endblock content %}

@@ -20,20 +20,38 @@ def index(request):
 
 def beer_detail(request, beer_id):
     beer = get_object_or_404(Beer, pk=beer_id)
-    return render(request, 'beers/beer_detail.html', {'beer': beer, 'ratings': beer.rating_data()})
+    return render(request, 'beers/beer_detail.html',
+        {
+            'beer': beer,
+            'ratings': beer.rating_data(),
+            'user_rating': beer.user_rating_data(request.user)
+        }
+    )
 
 
 def hops_detail(request, hops_id):
     hops = get_object_or_404(Hops, pk=hops_id)
-    return render(request, 'beers/hops_detail.html', {'hops': hops, 'ratings': hops.rating_data()})
+    return render(request, 'beers/hops_detail.html',
+        {
+            'hops': hops,
+            'ratings': hops.rating_data(),
+            'user_rating': hops.user_rating_data(request.user)
+        }
+    )
 
 
 def brewery_detail(request, brewery_id):
     brewery = get_object_or_404(Brewery, pk=brewery_id)
-    return render(request, 'beers/brewery_detail.html', {'brewery': brewery, 'ratings': brewery.rating_data()})
+    return render(request, 'beers/brewery_detail.html',
+        {
+            'brewery': brewery,
+            'ratings': brewery.rating_data(),
+            'user_rating': brewer.user_rating_data(request.user)
+        }
+    )
 
 
-def register(request):
+def signup(request):
     if request.user.is_authenticated:
         return redirect("/")
 

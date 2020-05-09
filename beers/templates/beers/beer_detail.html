@@ -19,11 +19,5 @@
       </ul>
     </div>
 
-    <div>
-      Ratings
-      <div>
-        Avg rating: {{ ratings.avg }}<br>
-        Std Dev: {{ ratings.stdev }}
-      </div>
-    </div>
+    {% include "beers/scores.html" %}
 {% endblock content %}

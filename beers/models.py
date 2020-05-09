@@ -19,6 +19,13 @@ class Hops(models.Model):
         reviews = Review.objects.filter(beer__hops__id=self.id)
         return calculate_rating_data(reviews)
 
+    def user_rating_data(self, user):
+        if not user.is_authenticated:
+            return None
+
+        reviews = Review.objects.filter(beer__hops__id=self.id, user__id=user.id)
+        return calculate_rating_data(reviews)
+
 
 class Beer(models.Model):
     name = models.TextField('name', null=False, blank=False)
@@ -33,6 +40,13 @@ class Beer(models.Model):
 
     def rating_data(self):
         reviews = self.reviews.all()
+        return calculate_rating_data(reviews)
+
+    def user_rating_data(self, user):
+        if not user.is_authenticated:
+            return None
+
+        reviews = self.reviews.filter(user__id=user.id)
         return calculate_rating_data(reviews)
 
 
@@ -50,6 +64,13 @@ class Brewery(models.Model):
 
     def rating_data(self):
         reviews = Review.objects.filter(beer__breweries__id=self.id)
+        return calculate_rating_data(reviews)
+
+    def user_rating_data(self, user):
+        if not user.is_authenticated:
+            return None
+
+        reviews = Review.objects.filter(beer__breweries__id=self.id, user__id=user.id)
         return calculate_rating_data(reviews)
 
 
