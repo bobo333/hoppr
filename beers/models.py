@@ -81,3 +81,6 @@ class Review(models.Model):
     body = models.TextField('body', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{} ({})".format(self.beer.name, self.user.username)

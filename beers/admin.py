@@ -9,6 +9,8 @@ class HopsBeerInline(admin.TabularInline):
 
 
 class HopsAdmin(admin.ModelAdmin):
+	ordering = ('name',)
+
 	inlines = [
 		HopsBeerInline,
 	]
@@ -21,13 +23,19 @@ class BeerBreweryInline(admin.TabularInline):
 
 
 class BeerAdmin(admin.ModelAdmin):
+	ordering = ('name',)
+
 	inlines = [
 		BeerBreweryInline,
 	]
+
+# Review
+class ReviewAdmin(admin.ModelAdmin):
+	ordering = ('beer__name',)
 
 
 # Register your models here.
 admin.site.register(Hops, HopsAdmin)
 admin.site.register(Beer, BeerAdmin)
 admin.site.register(Brewery)
-admin.site.register(Review)
+admin.site.register(Review, ReviewAdmin)

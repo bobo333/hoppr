@@ -24,7 +24,37 @@ def beer_detail(request, beer_id):
         {
             'beer': beer,
             'ratings': beer.rating_data(),
-            'user_rating': beer.user_rating_data(request.user)
+            'user_rating': beer.user_rating_data(request.user),
+            'predictions': {
+                'all': {
+                    'categories': {
+                        'Brewery': [{
+                                'name': b.name,
+                                'rating': b.rating_data()}
+                            for b in beer.breweries.all()
+                        ],
+                        'Hops': [{
+                                'name': h.name,
+                                'rating': h.rating_data()}
+                            for h in beer.hops.all()
+                        ]
+                    }
+                },
+                'user': {
+                    'categories': {
+                        'Brewery': [{
+                                'name': b.name,
+                                'rating': b.user_rating_data(request.user)}
+                            for b in beer.breweries.all()
+                        ],
+                        'Hops': [{
+                                'name': h.name,
+                                'rating': h.user_rating_data(request.user)}
+                            for h in beer.hops.all()
+                        ]
+                    }
+                }
+            },
         }
     )
 
@@ -46,7 +76,7 @@ def brewery_detail(request, brewery_id):
         {
             'brewery': brewery,
             'ratings': brewery.rating_data(),
-            'user_rating': brewer.user_rating_data(request.user)
+            'user_rating': brewery.user_rating_data(request.user)
         }
     )
 
