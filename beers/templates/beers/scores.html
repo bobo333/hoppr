@@ -3,7 +3,8 @@
         <div>
             Your Rating
             <div>
-            Avg Score: {{ user_rating.avg }}
+            Avg Score: {{ user_rating.avg | floatformat:2 }}<br>
+            Review Count: {{user_rating.count }}
             </div>
         </div>
     {% endif %}
@@ -11,8 +12,9 @@
     <div style="margin-top: 20px;">
         All Ratings
         <div>
-            Avg Score: {{ ratings.avg }}<br>
-            Std Dev: {{ ratings.stdev }}
+            Avg Score: {{ ratings.avg | floatformat:2 }}<br>
+            Std Dev: {{ ratings.stdev | floatformat:2 }}<br>
+            Review Count: {{ ratings.count }}
         </div>
     </div>
 {% endblock content %}

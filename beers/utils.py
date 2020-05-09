@@ -13,5 +13,6 @@ def calculate_rating_data(reviews):
 
     return {
         'avg': avg,
-        'stdev': sd
+        'stdev': sd,
+        'count': len(reviews),
     }
