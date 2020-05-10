@@ -38,4 +38,17 @@
           <p>No hops available.</p>
       {% endif %}
     </div>
+
+    <div>
+      Styles:
+      {% if styles_list %}
+          <ul>
+          {% for style in styles_list %}
+              <li><a href="{% url 'style_detail' style.id %}">{{ style.name }}</a></li>
+          {% endfor %}
+          </ul>
+      {% else %}
+          <p>No styles available.</p>
+      {% endif %}
+    </div>
 {% endblock content %}

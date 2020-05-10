@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        Name: {{ style.name }}<br>
+        id: {{ style.id }}
+    </div>
+
+    <div>
+      Beers:
+      <ul>
+          {% for beer in style.beers.all %}<li><a href="{% url 'beer_detail' beer.id %}">{{ beer.name }}</a></li>{% endfor %}
+      </ul>
+    </div>
+
+    {% include "beers/scores.html" %}
+{% endblock content %}

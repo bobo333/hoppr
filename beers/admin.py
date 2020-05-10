@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Hops, Beer, Brewery, Review
+from .models import Hops, BeerStyle, Beer, Brewery, Review
 
 # Hops
 class HopsBeerInline(admin.TabularInline):
@@ -14,6 +14,11 @@ class HopsAdmin(admin.ModelAdmin):
 	inlines = [
 		HopsBeerInline,
 	]
+
+
+# Beer Style
+class BeerStyleAdmin(admin.ModelAdmin):
+	ordering = ('name',)
 
 
 # Beer
@@ -36,6 +41,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Hops, HopsAdmin)
+admin.site.register(BeerStyle, BeerStyleAdmin)
 admin.site.register(Beer, BeerAdmin)
 admin.site.register(Brewery)
 admin.site.register(Review, ReviewAdmin)

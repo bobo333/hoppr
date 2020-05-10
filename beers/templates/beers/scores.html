@@ -1,19 +1,23 @@
 {% block content %}
-    {% if user_rating.avg %}
+    <div>
+        Your Rating
         <div>
-            Your Rating
-            <div>
-            Avg Score: {{ user_rating.avg | floatformat:2 }}<br>
-            Review Count: {{user_rating.count }}
-            </div>
+        {% if user_rating.avg %}
+        Avg Score: {{ user_rating.avg | floatformat:2 }}<br>
+        {% endif %}
+        Review Count: {{user_rating.count }}
         </div>
-    {% endif %}
-
+    </div>
+    
     <div style="margin-top: 20px;">
         All Ratings
         <div>
+            {% if ratings.avg %}
             Avg Score: {{ ratings.avg | floatformat:2 }}<br>
+            {% endif %}
+            {% if ratings.stdev %}
             Std Dev: {{ ratings.stdev | floatformat:2 }}<br>
+            {% endif %}
             Review Count: {{ ratings.count }}
         </div>
     </div>
