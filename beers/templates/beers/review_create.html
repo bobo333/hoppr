@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="{% url 'review_create' %}" method="post">
+{% csrf_token %}
+
+<div>
+Beer:<br>
+{% for beer in beers %}
+	<input type="radio" name="beer" id="beer{{forloop.counter}}" value="{{ beer.id }}">
+	<label for="beer{{forloop.counter}}">{{ beer.name }}</label><br>
+{% endfor %}
+</div>
+
+<div style="margin-top: 20px">
+{% for i in rating_range %}
+	<input type="radio" name="rating" id="rating{{forloop.counter}}" value="{{ i }}">
+	<label for="rating{{forloop.counter}}">{{ i }}</label><br>
+{% endfor %}
+</div>
+
+<input type="submit" value="Add Review">
+</form>
+
+
+{% endblock %}

@@ -1,58 +1,59 @@
 {% block content %}
+<div class="predictions">
+	<div class="rating-container">
+		Based on your ratings
 
-<div style="margin-top: 20px;">
-	Based on your ratings
-
-	<div style="margin-top: 10px;">
-		<table>
-			<tr>
-				<th></th>
-				<th>Avg</th>
-				<th>Stdev</th>
-			</tr>
-
-			{% for cat_name, cat_items in predictions.user.categories.items %}
+		<div style="margin-top: 10px;">
+			<table>
 				<tr>
-					<th colspan="3">{{ cat_name }}</th>
+					<th></th>
+					<th>Avg</th>
+					<th>Stdev</th>
 				</tr>
-				{% for item in cat_items %}
-				<tr>
-					<td>{{ item.name }}</td>
-					<td>{{ item.rating.avg | floatformat:2 }}</td>
-					<td>{{ item.rating.stdev | floatformat:2 }}</td>
-				</tr>
+
+				{% for cat_name, cat_items in predictions.user.categories.items %}
+					<tr>
+						<th colspan="3">{{ cat_name }}</th>
+					</tr>
+					{% for item in cat_items %}
+					<tr>
+						<td>{{ item.name }}</td>
+						<td>{{ item.rating.avg | floatformat:2 }}</td>
+						<td>{{ item.rating.stdev | floatformat:2 }}</td>
+					</tr>
+					{% endfor %}
 				{% endfor %}
-			{% endfor %}
 
-		</table>
+			</table>
+		</div>
 	</div>
-</div>
 
-<div style="margin-top: 20px;">
-	Based on all ratings
+	<div class="rating-container">
+		Based on all ratings
 
-	<div style="margin-top: 10px;">
-		<table>
-			<tr>
-				<th></th>
-				<th>Avg</th>
-				<th>Stdev</th>
-			</tr>
-
-			{% for cat_name, cat_items in predictions.all.categories.items %}
+		<div style="margin-top: 10px;">
+			<table>
 				<tr>
-					<th colspan="3">{{ cat_name }}</th>
+					<th></th>
+					<th>Avg</th>
+					<th>Stdev</th>
 				</tr>
-				{% for item in cat_items %}
-				<tr>
-					<td>{{ item.name }}</td>
-					<td>{{ item.rating.avg | floatformat:2 }}</td>
-					<td>{{ item.rating.stdev | floatformat:2 }}</td>
-				</tr>
+
+				{% for cat_name, cat_items in predictions.all.categories.items %}
+					<tr>
+						<th colspan="3">{{ cat_name }}</th>
+					</tr>
+					{% for item in cat_items %}
+					<tr>
+						<td>{{ item.name }}</td>
+						<td>{{ item.rating.avg | floatformat:2 }}</td>
+						<td>{{ item.rating.stdev | floatformat:2 }}</td>
+					</tr>
+					{% endfor %}
 				{% endfor %}
-			{% endfor %}
 
-		</table>
+			</table>
+		</div>
 	</div>
 </div>
 

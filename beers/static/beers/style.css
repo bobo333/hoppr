@@ -14,3 +14,26 @@ td, th {
 	border: 1px solid black;
 	padding: 5px;
 }
+
+.main-container {
+	float: left;
+	padding-right: 30px;
+}
+
+.scores {
+	margin-top: 20px;
+}
+
+.scores .rating-container {
+	margin-top: 20px;
+}
+
+.predictions {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.predictions .rating-container {
+	float: left;
+	padding-right: 30px;
+}

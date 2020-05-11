@@ -1,9 +1,10 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 
-from .models import Beer, BeerStyle, Brewery, Hops
+from .models import Beer, BeerStyle, Brewery, Hops, Review
 
 
 def index(request):
@@ -102,6 +103,29 @@ def style_detail(request, style_id):
             'user_rating': style.user_rating_data(request.user)
         }
     )
+
+
+@login_required
+def review_create(request):
+    if request.method == 'GET':
+        max_rating = 5
+        return render(request, 'beers/review_create.html', {
+            'rating_range': range(1, max_rating + 1),
+            'beers': Beer.objects.all(),
+        })
+
+    beer = get_object_or_404(Beer, pk=request.POST['beer'])
+    try:
+        rating_val = request.POST['rating']
+    except (KeyError):
+        return render(request, 'beers/review_create.html', {
+            'error_message': 'you must select a rating!',
+        })
+    else:
+        review = Review(beer=beer, user=request.user, rating=rating_val)
+        review.save()
+        return redirect('beer_detail', beer.id)
+
 
 
 def signup(request):

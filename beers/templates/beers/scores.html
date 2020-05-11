@@ -1,5 +1,6 @@
 {% block content %}
-    <div>
+<div class="scores">
+    <div class="rating-container">
         Your Rating
         <div>
         {% if user_rating.avg %}
@@ -9,7 +10,7 @@
         </div>
     </div>
     
-    <div style="margin-top: 20px;">
+    <div class="rating-container">
         All Ratings
         <div>
             {% if ratings.avg %}
@@ -21,4 +22,5 @@
             Review Count: {{ ratings.count }}
         </div>
     </div>
+</div>
 {% endblock content %}
