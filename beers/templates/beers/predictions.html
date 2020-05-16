@@ -20,8 +20,8 @@
 					{% for item in cat_items %}
 					<tr>
 						<td>{{ item.name }}</td>
-						<td>{{ item.rating.avg | floatformat:2 }}</td>
-						<td>{{ item.rating.stdev | floatformat:2 }}</td>
+						<td class="value">{{ item.rating.avg | floatformat:2 | default:'-' }}</td>
+						<td class="value">{{ item.rating.stdev | floatformat:2 | default:'-' }}</td>
 					</tr>
 					{% endfor %}
 				{% endfor %}
@@ -50,8 +50,8 @@
 					{% for item in cat_items %}
 					<tr>
 						<td>{{ item.name }}</td>
-						<td>{{ item.rating.avg | floatformat:2 }}</td>
-						<td>{{ item.rating.stdev | floatformat:2 }}</td>
+						<td class="value">{{ item.rating.avg | floatformat:2 | default:'-' }}</td>
+						<td class="value">{{ item.rating.stdev | floatformat:2 | default:'-' }}</td>
 					</tr>
 					{% endfor %}
 				{% endfor %}

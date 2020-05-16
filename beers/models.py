@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -70,6 +72,18 @@ class Beer(models.Model):
         reviews = self.reviews.filter(user__id=user.id)
         return calculate_rating_data(reviews)
 
+    def abv_proximity(self):
+        reviews = []
+        if self.abv:
+            reviews = Review.objects.filter(beer__abv__range=[self.abv - Decimal(.25), self.abv + Decimal(.25)]).exclude(beer__id=self.id)
+        return calculate_rating_data(reviews)
+
+    def user_abv_proximity(self, user):
+        reviews = []
+        if self.abv:
+            reviews = Review.objects.filter(beer__abv__range=[self.abv - Decimal(.25), self.abv + Decimal(.25)], user__id=user.id).exclude(beer__id=self.id)
+        return calculate_rating_data(reviews)
+
     def prediction_data(self, user):
         category_data = {
             'all': {
@@ -89,6 +103,10 @@ class Beer(models.Model):
                             'rating': s.rating_data()}
                         for s in self.styles.all()
                     ],
+                    'ABV':[{
+                        'name': '{} +/- .25 (%)'.format(self.abv),
+                        'rating': self.abv_proximity()
+                    }],
                 }
             },
             'user': {
@@ -108,6 +126,10 @@ class Beer(models.Model):
                             'rating': s.user_rating_data(user)}
                         for s in self.styles.all()
                     ],
+                    'ABV':[{
+                        'name': '{} +/- .25 (%)'.format(self.abv),
+                        'rating': self.user_abv_proximity(user)
+                    }],
                 }
             }
         }

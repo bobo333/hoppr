@@ -1,12 +1,11 @@
 from statistics import mean, stdev
 
-import pdb
-
 
 CATEGORY_WEIGHTS = {
     'Brewery': .4,
     'Hops': .4,
     'Style': .2,
+    'ABV': .3,
 }
 
 

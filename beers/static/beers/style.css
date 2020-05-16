@@ -15,6 +15,10 @@ td, th {
 	padding: 5px;
 }
 
+td.value {
+	text-align: center;
+}
+
 .main-container {
 	float: left;
 	padding-right: 30px;
