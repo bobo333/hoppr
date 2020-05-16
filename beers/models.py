@@ -58,6 +58,9 @@ class Beer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ('name',)
+
     def __str__(self):
         return self.name
 
@@ -104,7 +107,7 @@ class Beer(models.Model):
                         for s in self.styles.all()
                     ],
                     'ABV':[{
-                        'name': '{} +/- .25 (%)'.format(self.abv),
+                        'name': '{} +/- .25'.format(self.abv),
                         'rating': self.abv_proximity()
                     }],
                 }
@@ -127,7 +130,7 @@ class Beer(models.Model):
                         for s in self.styles.all()
                     ],
                     'ABV':[{
-                        'name': '{} +/- .25 (%)'.format(self.abv),
+                        'name': '{} +/- .25'.format(self.abv),
                         'rating': self.user_abv_proximity(user)
                     }],
                 }

@@ -15,7 +15,7 @@
 
 				{% for cat_name, cat_items in predictions.user.categories.items %}
 					<tr>
-						<th colspan="3">{{ cat_name }}</th>
+						<th colspan="3">{{ cat_name }}{% if cat_name == 'ABV' %} (%){% endif %}</th>
 					</tr>
 					{% for item in cat_items %}
 					<tr>
@@ -45,7 +45,7 @@
 
 				{% for cat_name, cat_items in predictions.all.categories.items %}
 					<tr>
-						<th colspan="3">{{ cat_name }}</th>
+						<th colspan="3">{{ cat_name }}{% if cat_name == 'ABV' %} (%){% endif %}</th>
 					</tr>
 					{% for item in cat_items %}
 					<tr>
