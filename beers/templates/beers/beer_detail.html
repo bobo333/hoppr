@@ -4,6 +4,9 @@
     <div>
         Name: {{ beer.name }}<br>
         ABV: {{ beer.abv }}%
+        {% if beer.ibu %}
+        <br>IBU: {{ beer.ibu }}
+        {% endif %}
     </div>
 
     <div style="margin-top: 20px;">
