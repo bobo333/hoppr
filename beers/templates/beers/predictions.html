@@ -1,7 +1,9 @@
 {% block content %}
 <div class="predictions">
 	<div class="rating-container">
-		Based on your ratings
+		Based on your ratings:
+		<br>
+		Overall: {{ predictions.user.overall | floatformat:2 | default:'(None)' }}
 
 		<div style="margin-top: 10px;">
 			<table>
@@ -29,7 +31,9 @@
 	</div>
 
 	<div class="rating-container">
-		Based on all ratings
+		Based on all ratings:
+		<br>
+		Overall prediction: {{ predictions.all.overall | floatformat:2 | default:'(None)' }}
 
 		<div style="margin-top: 10px;">
 			<table>

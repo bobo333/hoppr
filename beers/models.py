@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from .utils import calculate_rating_data
+from .utils import add_overall_prediction, calculate_rating_data
 
 
 class Hops(models.Model):
@@ -69,6 +69,52 @@ class Beer(models.Model):
 
         reviews = self.reviews.filter(user__id=user.id)
         return calculate_rating_data(reviews)
+
+    def prediction_data(self, user):
+        category_data = {
+            'all': {
+                'categories': {
+                    'Brewery': [{
+                            'name': b.name,
+                            'rating': b.rating_data()}
+                        for b in self.breweries.all()
+                    ],
+                    'Hops': [{
+                            'name': h.name,
+                            'rating': h.rating_data()}
+                        for h in self.hops.all()
+                    ],
+                    'Style': [{
+                            'name': s.name,
+                            'rating': s.rating_data()}
+                        for s in self.styles.all()
+                    ],
+                }
+            },
+            'user': {
+                'categories': {
+                    'Brewery': [{
+                            'name': b.name,
+                            'rating': b.user_rating_data(user)}
+                        for b in self.breweries.all()
+                    ],
+                    'Hops': [{
+                            'name': h.name,
+                            'rating': h.user_rating_data(user)}
+                        for h in self.hops.all()
+                    ],
+                    'Style': [{
+                            'name': s.name,
+                            'rating': s.user_rating_data(user)}
+                        for s in self.styles.all()
+                    ],
+                }
+            }
+        }
+        add_overall_prediction(category_data['user'])
+        add_overall_prediction(category_data['all'])
+
+        return category_data
 
 
 class Brewery(models.Model):

@@ -28,46 +28,7 @@ def beer_detail(request, beer_id):
             'beer': beer,
             'ratings': beer.rating_data(),
             'user_rating': beer.user_rating_data(request.user),
-            'predictions': {
-                'all': {
-                    'categories': {
-                        'Brewery': [{
-                                'name': b.name,
-                                'rating': b.rating_data()}
-                            for b in beer.breweries.all()
-                        ],
-                        'Hops': [{
-                                'name': h.name,
-                                'rating': h.rating_data()}
-                            for h in beer.hops.all()
-                        ],
-                        'Style': [{
-                                'name': s.name,
-                                'rating': s.rating_data()}
-                            for s in beer.styles.all()
-                        ],
-                    }
-                },
-                'user': {
-                    'categories': {
-                        'Brewery': [{
-                                'name': b.name,
-                                'rating': b.user_rating_data(request.user)}
-                            for b in beer.breweries.all()
-                        ],
-                        'Hops': [{
-                                'name': h.name,
-                                'rating': h.user_rating_data(request.user)}
-                            for h in beer.hops.all()
-                        ],
-                        'Style': [{
-                                'name': s.name,
-                                'rating': s.user_rating_data(request.user)}
-                            for s in beer.styles.all()
-                        ],
-                    }
-                }
-            },
+            'predictions': beer.prediction_data(request.user),
         }
     )
 
